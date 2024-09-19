@@ -1,57 +1,79 @@
-.student-details-container {
-    max-width: 800px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: rgba(255, 255, 255, 0.9); /* Slight transparency for contrast */
-    border-radius: 8px;
-    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
-    position: relative;
-    z-index: 1;
-    overflow: hidden; /* Ensure content stays visible */
+/* Main container for the whole page */
+.student-container {
+    display: flex;
 }
 
-/* body {
-    background-image: url('../../assets/bg2.jpg'); 
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-} */
+/* Sidebar styles */
+.sidebar {
+    width: 250px;
+    background-color: #141C25;
+    padding: 20px;
+    color: white;
+    height: 100vh;
+}
+
+.sidebar-header {
+    margin-bottom: 20px;
+}
+
+.sidebar-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.student-info p {
+    margin: 5px 0;
+}
+
+/* Main content section styles */
+.student-details-content {
+    flex-grow: 1;
+    padding: 20px;
+}
 
 .student-details-table {
     width: 100%;
-    border-collapse: collapse;
-    background-color: rgba(255, 255, 255, 0.95); /* Transparent white background */
-}
-
-.student-details-table th, .student-details-table td {
-    padding: 12px;
-    text-align: left;
-    border-bottom: 2px solid #bbb;
-    font-size: 16px;
-
-    color: #333;
-}
-
-.student-details-table th {
-    background-color: rgba(176, 132, 223, 0.8); /* Light purple header background */
-    font-weight: bold;
-    color: #fff; /* White text for headers */
-}
-
-.student-details-table td {
-    background-color: rgba(255, 230, 250, 0.85); /* Soft pink background for table data */
-    color: #444; /* Darker text color */
-}
-
-.student-details-container h2 {
-    text-align: center;
-    color:black; /* White text for the title */
     margin-bottom: 20px;
-    font-size: 24px;
+    border-collapse: collapse;
 }
 
-/* Ensures the entire table is visible on a fixed area */
-.fixed-table-container {
-    max-height: 600px; /* Adjust as needed */
-    overflow-y: auto;  /* Scrolls only when content exceeds the container height */
+.student-details-table th,
+.student-details-table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+/* Payment status grid */
+.actions-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.action-item {
+    background-color: #f5f5f5;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Payment status styles */
+.payment-status {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.paid {
+    color: green;
+}
+
+.not-paid {
+    color: red;
+}
+
+.amount-due {
+    margin-top: 5px;
+    font-size: 14px;
 }
