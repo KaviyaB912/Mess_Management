@@ -1,0 +1,64 @@
+/* src/Pages/NextPage/NextPage.css */
+.next-page-container {
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .next-page-container h1 {
+    color: #333;
+  }
+  
+  .next-page-container h2 {
+    color: #4CAF50;
+  }
+  
+  button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    margin-top: 20px;
+  }
+  .next-page-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-top: 50px;
+    padding: 20px;
+  }
+  
+  .qr-data-section, .payment-data-section {
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 8px;
+    width: 60%;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .upi-details {
+    margin-top: 20px;
+  }
+  
+  .strong {
+    font-weight: bold;
+  }
+  
+  .proceed-btn, .back-btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    margin-top: 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .proceed-btn:hover, .back-btn:hover {
+    background-color: #45a049;
+  }
+    
