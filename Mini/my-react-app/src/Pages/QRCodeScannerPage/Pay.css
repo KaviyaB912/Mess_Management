@@ -1,0 +1,71 @@
+/* Pay.css */
+
+/* General Page Styling */
+.scanner-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: #f9f9f9;
+    padding: 20px;
+}
+
+/* Header Styling */
+.scanner-header {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.scanner-header h3 {
+    font-size: 24px;
+    font-weight: 600;
+    color: #333;
+}
+
+/* QR Code Scanner Container */
+.scanner-content {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* QR Reader Styling */
+.scanner-content .qr-reader-container {
+    position: relative;
+    width: 100%;
+    height: 400px; /* Set a fixed height for the camera view */
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: #000; /* Ensure a black background if the camera feed fails */
+}
+
+.scanner-content .qr-reader-container video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Make sure the video scales properly */
+    border-radius: 10px;
+}
+
+/* Google Pay Button Styling */
+.google-pay-button {
+    width: 100%;
+    max-width: 300px;
+    margin-top: 20px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
