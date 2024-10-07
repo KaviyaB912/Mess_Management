@@ -1,10 +1,69 @@
-import React from 'react';
-import { useLocation } from 'react-router-dom';
-import './StudentDetails.css';  
+import React, { useState, useEffect } from 'react';
+import { useLocation,useNavigate } from 'react-router-dom';
+import './StudentDetails.css';
 
 function StudentDetails() {
     const location = useLocation();
-    const student = location.state?.student;   
+    const { register_number } = location.state;  // Retrieved from login
+    
+    const months = [
+        { name: "January", paid: true },
+        { name: "February", paid: false },
+        { name: "March", paid: true },
+        { name: "April", paid: true },
+        { name: "May", paid: false },
+        { name: "June", paid: true },
+        { name: "July", paid: false },
+        { name: "August", paid: true },
+        { name: "September", paid: true },
+        { name: "October", paid: true },
+        { name: "November", paid: false },
+        { name: "December", paid: true }
+    ];
+    const navigate = useNavigate();
+
+    const navigateToScanner = (month) => {
+        navigate(`/scanner?month=${month}`);
+    };
+
+    const [student, setStudent] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        // Fetch student details from the server
+        const fetchStudentDetails = async () => {
+            try {
+                const response = await fetch('http://localhost:5000/api/student-details', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ register_number }),
+                });
+                const data = await response.json();
+                if (data.student) {
+                    setStudent(data.student);
+                } else {
+                    setError(data.message);
+                }
+            } catch (error) {
+                setError('Error fetching student data');
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchStudentDetails();
+    }, [register_number]);
+
+    if (loading) {
+        return <p>Loading...</p>;
+    }
+
+    if (error) {
+        return <p>{error}</p>;
+    }
 
     return (
         <div className="student-container">
@@ -30,46 +89,40 @@ function StudentDetails() {
                         <table className="student-details-table">
                             <tbody>
                                 <tr>
-                                    <th>Register Number</th>
+                                    <th className='stu_Table_head'>Register Number</th>
                                     <td>{student.register_number}</td>
                                 </tr>
                                 <tr>
-                                    <th>Name</th>
+                                    <th className='stu_Table_head'>Name</th>
                                     <td>{student.name}</td>
                                 </tr>
                                 <tr>
-                                    <th>Department</th>
+                                    <th className='stu_Table_head'>Department</th>
                                     <td>{student.dept}</td>
                                 </tr>
                                 <tr>
-                                    <th>Year</th>
+                                    <th className='stu_Table_head'>Year</th>
                                     <td>{student.year}</td>
                                 </tr>
                             </tbody>
                         </table>
 
                         <div className="actions-grid">
-                            {Object.keys(student).filter(month => !['register_number', 'name', 'dept', 'year'].includes(month)).map((month) => (
-                                <div key={month} className="action-item">
-                                    <div className="action-icon">📅</div>
-                                    <p>{month.charAt(0).toUpperCase() + month.slice(1)}</p>
-
-                                    <div className={`payment-status ${parseFloat(student[month]) === 0.00 ? 'paid' : 'not-paid'}`}>
-
-                                         {parseFloat(student[month]) === 0.00 ? (
-                                            <>
-                                                <i className="status-icon">✔️</i>
-                                                <span>Paid</span>
-                                            </>
-                                        ) : (
-                                            <>
-                                                <span>Not Paid</span>
-                                                <p className="amount-due">Amount Due: ${student[month]}</p>
-                                            </>
-                                        )}
-                                    </div>
-                                </div>
-                            ))}
+                        {months.map((month, index) => (
+                        <div key={index} className="action-item">
+                            <div className="action-icon">📅</div>
+                            <p>{month.name}</p>
+                            <div className={`payment-status ${month.paid ? 'paid' : 'not-paid'}`}>
+                                {month.paid ? <i className="status-icon">✔</i> : <i className="status-icon">❌</i>}
+                                <span>{month.paid ? 'Paid' : 'Not Paid'}</span>
+                            </div>
+                            {!month.paid && (
+                                <button className="pay-button" onClick={() => navigateToScanner(month.name)}>
+                                    Pay Now
+                                </button>
+                            )}
+                        </div>
+                    ))}
                         </div>
                     </div>
                 ) : (
@@ -78,5 +131,6 @@ function StudentDetails() {
             </div>
         </div>
     );
-};
-export default Dashboard;
+}
+
+export default StudentDetails;
